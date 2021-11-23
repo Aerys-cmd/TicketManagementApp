@@ -14,7 +14,7 @@ namespace TicketManagementApp.Services.Concrete
         private readonly ITicketRepository _ticketRepository;
         private readonly ITicketDetailService _ticketDetailService;
         private readonly IEmployeeService _employeeService;
-        private readonly ICustomerService _customerService,
+        private readonly ICustomerService _customerService;
         public TicketManager(ITicketRepository ticketRepository, ITicketDetailService ticketDetailService, IEmployeeService employeeService, ICustomerService customerService)
         {
             this._ticketRepository = ticketRepository;

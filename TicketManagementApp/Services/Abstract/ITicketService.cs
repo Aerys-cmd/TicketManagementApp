@@ -8,7 +8,7 @@ namespace TicketManagementApp.Services.Abstract
 {
     public interface ITicketService
     {
-        public void CreateTicket(Ticket ticket);
+        public void CreateTicket(Ticket ticket, string customerId);
 
 
         /// <summary>
@@ -20,10 +20,7 @@ namespace TicketManagementApp.Services.Abstract
 
 
 
-        public void AssignTicketToEmployee(string employeeId, string ticketId)
-        {
-
-        }
+        public void AssignTicketToEmployee(string employeeId, string ticketId);
 
         public void CloseTicket(string Id);
         public void CompleteTicket(string Id);

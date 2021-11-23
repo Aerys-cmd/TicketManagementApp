@@ -2,3 +2,17 @@
 @model TicketManagementApp.Pages.TicketProcess.CreateTicketModel
 @{
 }
+<form method="post">
+    <div>
+        <input asp-for="Ticket.Subject" type="text" placeholder="Ticket Konusu" />
+        <span asp-validation-for="Ticket.Subject"></span>
+    </div>
+    <div>
+        <input asp-for="Ticket.Description" type="text" placeholder="Ticket Açıklaması" />
+        <span asp-validation-for="Ticket.Description"></span>
+    </div>
+    <select asp-for="selectedCustomerId" asp-items="Model.SelectListItems">
+    </select>
+    <div><input type="submit" asp-page-handler="Save" /></div>
+</form>
+
