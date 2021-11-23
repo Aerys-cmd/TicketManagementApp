@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TicketManagementApp.Models;
+using TicketManagementApp.Repositories.Abstract;
+using TicketManagementApp.Repositories.Concrete;
 using TicketManagementApp.Services.Abstract;
 using TicketManagementApp.Services.Concrete;
 
@@ -32,7 +34,19 @@ namespace TicketManagementApp
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
+            //Servisler tanýmlandý.
             services.AddScoped<ITicketDetailService, TicketDetailManager>();
+            services.AddSingleton<IEmailSender, NetSmptMailManager>();
+            services.AddScoped<ITicketService, TicketManager>();
+            services.AddScoped<IEmployeeService, EmployeeManager>();
+            services.AddScoped<ICustomerService, CustomerManager>();
+            //Repositoryler tanýmlandý.
+            services.AddScoped<ICustomerRepository, EFCustomerRepository>();
+            services.AddScoped<IEmployeeRepository, EFEmployeeRepository>();
+            services.AddScoped<ITicketDetailRepository, EFTicketDetailRepository>();
+            services.AddScoped<ITicketRepository, EFTicketRepository>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

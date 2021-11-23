@@ -11,11 +11,16 @@ namespace TicketManagementApp.Services.Concrete
     public class TicketDetailManager : ITicketDetailService
     {
         private readonly ITicketDetailRepository _ticketDetailRepository;
+        private readonly IEmailSender _emailSender;
+        private readonly ICustomerService _customerService;
 
-        public TicketDetailManager(ITicketDetailRepository ticketDetailRepository)
+        public TicketDetailManager(ITicketDetailRepository ticketDetailRepository, IEmailSender emailSender, ICustomerService customerService)
         {
             _ticketDetailRepository = ticketDetailRepository;
+            _emailSender = emailSender;
+            _customerService = customerService;
         }
+
 
         private void AddTicketDetail(Ticket ticket, TicketStatus ticketStatus)
         {
@@ -29,6 +34,7 @@ namespace TicketManagementApp.Services.Concrete
         public void SetTicketStatusOpen(Ticket ticket)
         {
             AddTicketDetail(ticket, TicketStatus.Open);
+            _emailSender.SendNotification(ticket.Customer.Email, "Ticket Başarılı bir şekilde ulaştı.", $"Ticket Numaranız  {ticket.Id}");
         }
 
         public void SetTicketStatusReadyForAssignment(Ticket ticket)
@@ -39,24 +45,29 @@ namespace TicketManagementApp.Services.Concrete
         public void SetTicketStatusAssigned(Ticket ticket)
         {
             AddTicketDetail(ticket, TicketStatus.Assigned);
+            _emailSender.SendNotification(ticket.Employee.Email, "Size bir ticket atandı.", $"Size atanan ticketın Ticket Numarası: {ticket.Id}");
 
         }
 
         public void SetTicketStatusClosed(Ticket ticket)
         {
             AddTicketDetail(ticket, TicketStatus.Closed);
+            _emailSender.SendNotification(ticket.Employee.Manager.Email, "Atadığınız bir ticket kapatıldı.", $"Ticket'ı atadığınız {ticket.Employee.Name} isimli çalışan ticket'ı kapandı olarak işaretledi.");
 
         }
 
         public void SetTicketStatusReview(Ticket ticket)
         {
             AddTicketDetail(ticket, TicketStatus.Review);
+            _emailSender.SendNotification(ticket.Employee.Email, "Review isteği", $"Kapattığınız {ticket.Id} nolu ticket" +
+                $"müdürünüz tarafından review yapıldı lütfen kontrol sağlayın.");
 
         }
 
         public void SetTicketStatusCompleted(Ticket ticket)
         {
             AddTicketDetail(ticket, TicketStatus.Completed);
+            _emailSender.SendNotification(ticket.Customer.Email, "Açtığınız ticket sonuçlandı.", $"{ticket.Id} nolu ticket çözüme ulaşmıştır. Sorununuz devam ediyorsa yeni bir ticket açabilirsiniz.");
 
         }
 

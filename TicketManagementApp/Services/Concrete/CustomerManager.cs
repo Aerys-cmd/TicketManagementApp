@@ -28,7 +28,9 @@ namespace TicketManagementApp.Services.Concrete
 
         public List<Customer> GetAllCustomers()
         {
+
             return _customerRepository.List();
+
         }
     }
 }
