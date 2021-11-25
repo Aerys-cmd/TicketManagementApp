@@ -13,12 +13,14 @@ namespace TicketManagementApp.Services.Concrete
         private readonly ITicketDetailRepository _ticketDetailRepository;
         private readonly IEmailSender _emailSender;
         private readonly ICustomerService _customerService;
+        private readonly IEmployeeService _employeeService;
 
-        public TicketDetailManager(ITicketDetailRepository ticketDetailRepository, IEmailSender emailSender, ICustomerService customerService)
+        public TicketDetailManager(ITicketDetailRepository ticketDetailRepository, IEmailSender emailSender, ICustomerService customerService, IEmployeeService employeeService)
         {
             _ticketDetailRepository = ticketDetailRepository;
             _emailSender = emailSender;
             _customerService = customerService;
+            _employeeService = employeeService;
         }
 
 
@@ -52,7 +54,9 @@ namespace TicketManagementApp.Services.Concrete
         public void SetTicketStatusClosed(Ticket ticket)
         {
             AddTicketDetail(ticket, TicketStatus.Closed);
-            _emailSender.SendNotification(ticket.Employee.Manager.Email, "Atadığınız bir ticket kapatıldı.", $"Ticket'ı atadığınız {ticket.Employee.Name} isimli çalışan ticket'ı kapandı olarak işaretledi.");
+            var Manager = _employeeService.GetManagerCredentialsByEmployeeId(ticket.Employee.Id);
+
+            _emailSender.SendNotification(Manager.Email, "Atadığınız bir ticket kapatıldı.", $"Ticket'ı atadığınız {ticket.Employee.Name} isimli çalışan ticket'ı kapandı olarak işaretledi.");
 
         }
 

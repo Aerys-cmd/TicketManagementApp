@@ -10,6 +10,7 @@ namespace TicketManagementApp.Services.Abstract
     {
         Employee GetEmployeeById(string Id);
         List<Employee> GetAllEmployees();
+        Employee GetManagerCredentialsByEmployeeId(string id);
 
 
     }

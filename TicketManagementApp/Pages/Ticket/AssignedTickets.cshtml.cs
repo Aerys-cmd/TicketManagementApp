@@ -21,6 +21,12 @@ namespace TicketManagementApp.Pages.Ticket
     {
         private readonly ITicketService _ticketService;
         private readonly ITicketDetailService _ticketDetailService;
+
+        public AssignedTicketsModel(ITicketService ticketService, ITicketDetailService ticketDetailService)
+        {
+            _ticketService = ticketService;
+            _ticketDetailService = ticketDetailService;
+        }
         public List<AssignedTicketsViewModel> ViewModels { get; set; } = new();
         [BindProperty] public List<string> TicketIds { get; set; } = new();
 
@@ -42,10 +48,21 @@ namespace TicketManagementApp.Pages.Ticket
                     Description = ticket.Description,
                     Subject = ticket.Subject
                 });
-
-               
+                if (TicketIds.Count < ViewModels.Count)
+                {
+                    TicketIds.Add("");
+                }
             });
+            ViewModels = ViewModels.OrderByDescending(x => x.AssignedDate).ToList();
 
+        }
+
+        public void OnPostCloseTicket(int index)
+        {
+            if (index >= 0)
+            {
+                _ticketService.CloseTicket(TicketIds[index]);
+            }
         }
     }
 }

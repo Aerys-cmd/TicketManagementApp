@@ -31,5 +31,10 @@ namespace TicketManagementApp.Services.Concrete
         {
             return _employeeRepository.List();
         }
+
+        public Employee GetManagerCredentialsByEmployeeId(string id)
+        {
+            return _employeeRepository.Find(id).Manager;
+        }
     }
 }
