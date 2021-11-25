@@ -30,7 +30,7 @@
                         <label>@Model.ViewModels[i].AssignedDate</label>
                     </td>
                     <td>
-                        <input type="submit" asp-page-handler="CloseTicket" asp-route-index="@i" placeholder="CloseTask" />
+                        <input type="submit" asp-page-handler="CloseTicket" asp-route-index="@i" value="CloseTask" />
                         <input type="hidden" asp-for="TicketIds[i]" value="@Model.ViewModels[i].Id" />
                     </td>
                 </tr>

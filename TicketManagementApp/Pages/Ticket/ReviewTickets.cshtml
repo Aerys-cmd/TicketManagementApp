@@ -1,5 +1,5 @@
 ﻿@page
-@model TicketManagementApp.Pages.Ticket.ClosedTicketsModel
+@model TicketManagementApp.Pages.Ticket.ReviewTicketsModel
 @{
 }
 
@@ -10,7 +10,7 @@
                 <th>Subject</th>
                 <th>Description</th>
                 <th>Assignee</th>
-                <th>Assigned Date</th>
+                <th>ReviewDate</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -28,21 +28,16 @@
                         <label>@Model.ViewModels[i].Assignee</label>
                     </td>
                     <td>
-                        <label>@Model.ViewModels[i].ClosedDate</label>
+                        <label>@Model.ViewModels[i].ReviewDate</label>
                     </td>
                     <td>
-                        <input type="submit" asp-page-handler="ReviewTicket" asp-route-index="@i" value="Review" />
-
-                    </td>
-                    <td>
-                        <input type="submit" asp-page-handler="CompleteTicket" asp-route-index="@i" value="Complete" />
+                        <input type="submit" asp-page-handler="CloseTicket" asp-route-index="@i" value="Close Ticket" />
                         <input type="hidden" asp-for="TicketIds[i]" value="@Model.ViewModels[i].Id" />
                     </td>
-
                 </tr>
             }
-
         </tbody>
     </table>
-</form>
 
+
+</form>

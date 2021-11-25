@@ -8,63 +8,50 @@ using TicketManagementApp.Services.Abstract;
 
 namespace TicketManagementApp.Pages.Ticket
 {
-    public class ClosedTicketViewModel
+    public class ReviewTicketViewModel
     {
         public string Id { get; set; }
         public string Subject { get; set; }
         public string Description { get; set; }
         public string Assignee { get; set; }
-        public DateTime ClosedDate { get; set; }
+        public DateTime ReviewDate { get; set; }
+
 
     }
-    public class ClosedTicketsModel : PageModel
+    public class ReviewTicketsModel : PageModel
     {
         private readonly ITicketService _ticketService;
         private readonly ITicketDetailService _ticketDetailService;
+        public List<ReviewTicketViewModel> ViewModels { get; set; } = new();
+        [BindProperty] public List<string> TicketIds { get; set; } = new();
 
-        public ClosedTicketsModel(ITicketService ticketService, ITicketDetailService ticketDetailService)
+        public ReviewTicketsModel(ITicketService ticketService, ITicketDetailService ticketDetailService)
         {
             _ticketService = ticketService;
             _ticketDetailService = ticketDetailService;
         }
-
-        public List<ClosedTicketViewModel> ViewModels { get; set; } = new();
-        [BindProperty] public List<string> TicketIds { get; set; } = new();
-
-
         public void OnGet()
         {
             fillList();
         }
 
-        public void OnPostReviewTicket(int index)
+        public void OnPostCloseTicket(int index)
         {
             if (index >= 0)
             {
-                _ticketService.SendTicketToReview(TicketIds[index]);
+                _ticketService.CloseTicket(TicketIds[index]);
             }
-            TicketIds.Clear();
-            fillList();
-        }
-        public void OnPostCompleteTicket(int index)
-        {
-            if (index >= 0)
-            {
-                _ticketService.CompleteTicket(TicketIds[index]);
-            }
-            TicketIds.Clear();
-            fillList();
-        }
 
+        }
         private void fillList()
         {
-            var tickets = _ticketService.GetClosedTickets();
+            var tickets = _ticketService.GetReviewTickets();
             tickets.ForEach(ticket =>
             {
-                ViewModels.Add(new ClosedTicketViewModel
+                ViewModels.Add(new ReviewTicketViewModel
                 {
                     Id = ticket.Id,
-                    ClosedDate = _ticketDetailService.GetClosedTicketDetailByTicketId(ticket.Id).Date,
+                    ReviewDate = _ticketDetailService.GetReviewTicketDetailByTicketId(ticket.Id).Date,
                     Assignee = ticket.Employee.Name,
                     Description = ticket.Description,
                     Subject = ticket.Subject
@@ -74,7 +61,7 @@ namespace TicketManagementApp.Pages.Ticket
                     TicketIds.Add("");
                 }
             });
-            ViewModels = ViewModels.OrderByDescending(x => x.ClosedDate).ToList();
+            ViewModels = ViewModels.OrderByDescending(x => x.ReviewDate).ToList();
         }
     }
 }

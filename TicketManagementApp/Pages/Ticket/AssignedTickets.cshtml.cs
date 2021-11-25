@@ -63,6 +63,9 @@ namespace TicketManagementApp.Pages.Ticket
             {
                 _ticketService.CloseTicket(TicketIds[index]);
             }
+
+            TicketIds.Clear();
+            fillList();
         }
     }
 }
