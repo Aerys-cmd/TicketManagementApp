@@ -31,6 +31,12 @@ namespace TicketManagementApp.Services.Abstract
         public List<Ticket> GetOpenTickets();
         public List<Ticket> GetReadyForAssignmentTickets();
         public List<Ticket> GetAssignedTickets();
+        public List<Ticket> GetClosedTickets();
+        public List<Ticket> GetReviewTickets();
+        public List<Ticket> GetCompletedTickets();
+
+
+
 
 
 

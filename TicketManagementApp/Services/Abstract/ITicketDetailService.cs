@@ -27,6 +27,12 @@ namespace TicketManagementApp.Services.Abstract
 
         public TicketDetail GetOpenTicketDetailByTicketId(string Id);
         public TicketDetail GetAssignedTicketDetailByTicketId(string Id);
+        public TicketDetail GetClosedTicketDetailByTicketId(string Id);
+        public TicketDetail GetCompletedTicketDetailByTicketId(string Id);
+        public TicketDetail GetReviewTicketDetailByTicketId(string Id);
+
+
+
 
     }
 }

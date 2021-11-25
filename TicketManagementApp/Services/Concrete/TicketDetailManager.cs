@@ -85,6 +85,24 @@ namespace TicketManagementApp.Services.Concrete
             return GetTicketDetailByTicketId(Id, TicketStatus.Assigned.ToString());
         }
 
+        public TicketDetail GetClosedTicketDetailByTicketId(string Id)
+        {
+            return GetTicketDetailByTicketId(Id, TicketStatus.Closed.ToString());
+
+        }
+
+        public TicketDetail GetCompletedTicketDetailByTicketId(string Id)
+        {
+            return GetTicketDetailByTicketId(Id, TicketStatus.Completed.ToString());
+
+        }
+
+        public TicketDetail GetReviewTicketDetailByTicketId(string Id)
+        {
+            return GetTicketDetailByTicketId(Id, TicketStatus.Review.ToString());
+
+        }
+
         private TicketDetail GetTicketDetailByTicketId(string Id, string status)
         {
             var ticketDetails = _ticketDetailRepository.List();

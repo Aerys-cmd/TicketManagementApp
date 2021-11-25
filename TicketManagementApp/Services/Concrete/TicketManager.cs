@@ -66,6 +66,7 @@ namespace TicketManagementApp.Services.Concrete
             IsEmployeeAvailable(employee);
             ticket.Employee = employee;
             ticket.Status = TicketStatus.Assigned.ToString();
+            _ticketRepository.Update(ticket);
             _ticketDetailService.SetTicketStatusAssigned(ticket);
         }
 
@@ -113,6 +114,7 @@ namespace TicketManagementApp.Services.Concrete
             ValidateTicketInfo(ticket);
             isTicketHasHigherPriority(ticket);
             ticket.Status = TicketStatus.Closed.ToString();
+            _ticketRepository.Update(ticket);
             _ticketDetailService.SetTicketStatusClosed(ticket);
         }
 
@@ -130,6 +132,8 @@ namespace TicketManagementApp.Services.Concrete
             var ticket = _ticketRepository.Find(Id);
             ValidateTicketInfo(ticket);
             ticket.Status = TicketStatus.Completed.ToString();
+            _ticketRepository.Update(ticket);
+
             _ticketDetailService.SetTicketStatusCompleted(ticket);
 
         }
@@ -139,6 +143,8 @@ namespace TicketManagementApp.Services.Concrete
             var ticket = _ticketRepository.Find(Id);
             ValidateTicketInfo(ticket);
             ticket.Status = TicketStatus.Review.ToString();
+            _ticketRepository.Update(ticket);
+
             _ticketDetailService.SetTicketStatusReview(ticket);
         }
 
@@ -164,6 +170,24 @@ namespace TicketManagementApp.Services.Concrete
         public List<Ticket> GetAssignedTickets()
         {
             return getAllTickets().Where(x => x.Status == TicketStatus.Assigned.ToString()).ToList();
+        }
+
+        public List<Ticket> GetClosedTickets()
+        {
+            return getAllTickets().Where(x => x.Status == TicketStatus.Closed.ToString()).ToList();
+
+        }
+
+        public List<Ticket> GetReviewTickets()
+        {
+            return getAllTickets().Where(x => x.Status == TicketStatus.Review.ToString()).ToList();
+
+        }
+
+        public List<Ticket> GetCompletedTickets()
+        {
+            return getAllTickets().Where(x => x.Status == TicketStatus.Completed.ToString()).ToList();
+
         }
 
 
