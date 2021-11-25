@@ -73,7 +73,11 @@ namespace TicketManagementApp.Services.Concrete
         private void IsEmployeeAvailable(Employee employee)
         {
             var assignedTickets
-                = _ticketRepository.List().Where(x => x.Employee.Id == employee.Id).ToList();
+                = _ticketRepository.List();
+            assignedTickets = assignedTickets.Where(x =>
+                    x.Status != TicketStatus.Open.ToString() && x.Status != TicketStatus.ReadyForAssignment.ToString())
+                .ToList();
+            assignedTickets = assignedTickets.Where(x => x.Employee.Id == employee.Id).ToList();
             List<TicketDetail> assignedTicketDetails = new();
 
             foreach (var assignedTicket in assignedTickets)
@@ -83,7 +87,7 @@ namespace TicketManagementApp.Services.Concrete
                 assignedTicketDetails.Add(ticketDetail);
             }
             var thisMonthsDetails =
-                assignedTicketDetails.Where(x => x.Date >= DateTime.Now.AddMonths(-1) && x.Date <= DateTime.Now);
+                assignedTicketDetails.Where(x => x.Date >= DateTime.Now.AddMonths(-1) && x.Date <= DateTime.Now).ToList();
             List<Ticket> sortedTickets = new();
 
             foreach (var thisMonthsDetail in thisMonthsDetails)
