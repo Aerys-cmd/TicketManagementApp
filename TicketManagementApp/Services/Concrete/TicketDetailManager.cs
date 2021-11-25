@@ -71,5 +71,23 @@ namespace TicketManagementApp.Services.Concrete
 
         }
 
+        public TicketDetail GetOpenTicketDetailByTicketId(string Id)
+        {
+            return GetTicketDetailByTicketId(Id, TicketStatus.Open.ToString());
+        }
+
+        public TicketDetail GetAssignedTicketDetailByTicketId(string Id)
+        {
+            return GetTicketDetailByTicketId(Id, TicketStatus.Assigned.ToString());
+        }
+
+        private TicketDetail GetTicketDetailByTicketId(string Id, string status)
+        {
+            var ticketDetails = _ticketDetailRepository.List();
+            return ticketDetails.Where(x => x.Status == status && x.Ticket.Id == Id).OrderByDescending(x => x.Date)
+                .FirstOrDefault();
+        }
+
+
     }
 }

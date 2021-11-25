@@ -10,7 +10,7 @@ using TicketManagementApp.Models;
 namespace TicketManagementApp.Migrations
 {
     [DbContext(typeof(TicketManagementDbContext))]
-    [Migration("20211122172745_First")]
+    [Migration("20211125131639_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,7 +70,9 @@ namespace TicketManagementApp.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<short>("Difficulty")
                         .HasColumnType("smallint");
@@ -85,7 +87,9 @@ namespace TicketManagementApp.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Subject")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 

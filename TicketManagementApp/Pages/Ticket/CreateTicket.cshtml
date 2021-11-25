@@ -1,5 +1,5 @@
 ﻿@page
-@model TicketManagementApp.Pages.TicketProcess.CreateTicketModel
+@model TicketManagementApp.Pages.Ticket.CreateTicketModel
 @{
 }
 <form method="post">
@@ -11,8 +11,9 @@
         <input asp-for="Ticket.Description" type="text" placeholder="Ticket Açıklaması" />
         <span asp-validation-for="Ticket.Description"></span>
     </div>
-    <select asp-for="selectedCustomerId" asp-items="Model.SelectListItems">
+    <select asp-for="SelectedCustomerId" asp-items="Model.Customers">
     </select>
+    <span asp-validation-for="Customers"></span>
     <div><input type="submit" asp-page-handler="Save" /></div>
 </form>
 

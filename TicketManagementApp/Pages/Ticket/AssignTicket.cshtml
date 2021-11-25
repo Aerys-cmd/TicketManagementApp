@@ -1,0 +1,46 @@
+﻿@page
+@model TicketManagementApp.Pages.Ticket.AssignTicketModel
+@{
+}
+<form method="post">
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Difficulty Level</th>
+                <th>Priority</th>
+                <th>Assign To</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.TicketAssignViewModels.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <label>@Model.TicketAssignViewModels[i].Subject</label>
+                    </td>
+                    <td>
+                        <label>@Model.TicketAssignViewModels[i].Description</label>
+                    </td>
+                    <td>
+                        <label>@Model.TicketAssignViewModels[i].Difficulty</label>
+                    </td>
+                    <td>
+                        <label>@Model.TicketAssignViewModels[i].Priority</label>
+                    </td>
+                    <td>
+                        <select asp-for="InputModels[i].EmployeeId" asp-items="Model.EmployeeList">
+                        </select>
+                        <input type="hidden" asp-for="InputModels[i].TicketId" value="@Model.TicketAssignViewModels[i].Id" />
+                    </td>
+                    <td>
+                        <input type="submit" asp-page-handler="AssignEmployee" asp-route-index="@i" placeholder="Assign" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</form>

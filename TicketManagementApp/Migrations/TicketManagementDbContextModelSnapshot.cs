@@ -68,7 +68,9 @@ namespace TicketManagementApp.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<short>("Difficulty")
                         .HasColumnType("smallint");
@@ -83,7 +85,9 @@ namespace TicketManagementApp.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Subject")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 

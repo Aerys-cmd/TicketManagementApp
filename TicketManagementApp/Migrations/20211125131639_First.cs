@@ -46,8 +46,8 @@ namespace TicketManagementApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Subject = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
+                    Subject = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Status = table.Column<string>(type: "text", nullable: true),
                     Difficulty = table.Column<short>(type: "smallint", nullable: false),
                     Priority = table.Column<short>(type: "smallint", nullable: false),

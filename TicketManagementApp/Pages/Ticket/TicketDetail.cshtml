@@ -1,0 +1,45 @@
+﻿@page "{id}"
+@model TicketManagementApp.Pages.Ticket.TicketDetailModel
+@{
+    var Id = ViewData["Id"];
+}
+
+
+
+
+<div style="padding-left:150px">Ticket Tarihi : @Model.TicketViewModel.OpenDate.ToString()</div>
+<div>
+    <label>Konu:@Model.TicketViewModel.Subject </label>
+</div>
+<div>
+    <p>Açıklama:@Model.TicketViewModel.Description </p>
+</div>
+<div>
+    <label>Şirket: @Model.TicketViewModel.CustomerName </label>
+</div>
+<form method="post">
+    <input type="hidden" asp-for="TicketInputModel.Id" value="@Id" />
+    <div style="padding-left: 150px">
+        Önem Derecesi :
+    </div>
+    <div style="padding-left: 150px">
+
+        @foreach (var priority in Model.Priorities)
+        {
+            @*<input type="radio" asp-for="TicketInputModels.Priority" name="Priority" value="@priority" checked />@priority*@
+            @Html.RadioButtonFor(model => model.TicketInputModel.Priority, priority) @priority<br />
+        }
+    </div>
+    <div>
+        Zorluk Derecesi :
+    </div>
+    <div>
+        @foreach (var difficulty in Model.Difficulties)
+        {
+            @*<input type="radio" asp-for="TicketInputModels.Difficulty" name="Difficulty" value="@difficulty" />@difficulty<br />*@
+
+            @Html.RadioButtonFor(model => model.TicketInputModel.Difficulty, difficulty) @difficulty<br />
+        }
+    </div>
+    <input type="submit" placeholder="Güncelle" asp-page-handler="UpdateTicket" />
+</form>

@@ -26,6 +26,12 @@ namespace TicketManagementApp.Services.Abstract
         public void CompleteTicket(string Id);
 
         public void SendTicketToReview(string Id);
+        public Ticket GetTicketById(string Id);
+
+        public List<Ticket> GetOpenTickets();
+        public List<Ticket> GetReadyForAssignmentTickets();
+        public List<Ticket> GetAssignedTickets();
+
 
 
 

@@ -92,6 +92,30 @@ namespace TicketManagementApp.Services.Concrete
             _ticketDetailService.SetTicketStatusReview(ticket);
         }
 
+        private List<Ticket> getAllTickets()
+        {
+            return _ticketRepository.List();
+        }
+        public Ticket GetTicketById(string Id)
+        {
+            return _ticketRepository.Find(Id);
+        }
+
+        public List<Ticket> GetOpenTickets()
+        {
+            return getAllTickets().Where(x => x.Status == TicketStatus.Open.ToString()).ToList();
+        }
+
+        public List<Ticket> GetReadyForAssignmentTickets()
+        {
+            return getAllTickets().Where(x => x.Status == TicketStatus.ReadyForAssignment.ToString()).ToList();
+        }
+
+        public List<Ticket> GetAssignedTickets()
+        {
+            return getAllTickets().Where(x => x.Status == TicketStatus.Assigned.ToString()).ToList();
+        }
+
 
         private void IsTicketAssigned(Ticket ticket)
         {

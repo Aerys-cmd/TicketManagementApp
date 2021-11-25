@@ -25,5 +25,8 @@ namespace TicketManagementApp.Services.Abstract
 
         public void SetTicketStatusCompleted(Ticket ticket);
 
+        public TicketDetail GetOpenTicketDetailByTicketId(string Id);
+        public TicketDetail GetAssignedTicketDetailByTicketId(string Id);
+
     }
 }

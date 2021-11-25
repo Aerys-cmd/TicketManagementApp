@@ -1,0 +1,34 @@
+﻿@page
+@model TicketManagementApp.Pages.Ticket.OpenTicketsModel
+@{
+}
+
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Description</th>
+            <th>OpenDate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.OpenTicketModels.Count; i++)
+        {
+            <tr>
+                <td>
+                    <label>@Model.OpenTicketModels[i].Subject</label>
+                </td>
+                <td>
+                    <label>@Model.OpenTicketModels[i].Description</label>
+                </td>
+                <td>
+                    <label>@Model.OpenTicketModels[i].OpenDate</label>
+                </td>
+                <td>
+                    <a asp-page="TicketDetail" asp-route-id="@Model.OpenTicketModels[i].Id">Set Technical Details</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

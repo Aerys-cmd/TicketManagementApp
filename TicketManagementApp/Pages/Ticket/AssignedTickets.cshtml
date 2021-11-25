@@ -1,0 +1,39 @@
+﻿@page
+@model TicketManagementApp.Pages.Ticket.AssignedTicketsModel
+@{
+}
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Description</th>
+            <th>Assignee</th>
+            <th>Assigned Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.ViewModels.Count; i++)
+        {
+            <tr>
+                <td>
+                    <label>@Model.ViewModels[i].Subject</label>
+                </td>
+                <td>
+                    <label>@Model.ViewModels[i].Description</label>
+                </td>
+                <td>
+                    <label>@Model.ViewModels[i].Assignee</label>
+                </td>
+                <td>
+                    <label>@Model.ViewModels[i].AssignedDate</label>
+                </td>
+                <td>
+                    <input type="submit" asp-page-handler="AssignEmployee" asp-route-index="@i" placeholder="Assign" />
+                    <input type="hidden" asp-for="TicketIds" value="@Model.ViewModels[i].Id" />
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
