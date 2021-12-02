@@ -25,7 +25,7 @@
                     <label>@Model.OpenTicketModels[i].OpenDate</label>
                 </td>
                 <td>
-                    <a asp-page="TicketDetail" asp-route-id="@Model.OpenTicketModels[i].Id">Set Technical Details</a>
+                    <a asp-page="TicketDetail" asp-route-name="@Model.OpenTicketModels[i].Id">Set Technical Details</a>
                 </td>
             </tr>
         }

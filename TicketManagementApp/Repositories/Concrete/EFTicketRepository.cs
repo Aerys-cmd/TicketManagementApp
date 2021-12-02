@@ -10,7 +10,7 @@ namespace TicketManagementApp.Repositories.Concrete
 {
     public class EFTicketRepository : ITicketRepository
     {
-        private TicketManagementDbContext _db;
+        private readonly TicketManagementDbContext _db;
         public EFTicketRepository(TicketManagementDbContext db)
         {
             _db = db;

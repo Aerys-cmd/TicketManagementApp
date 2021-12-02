@@ -9,7 +9,7 @@ namespace TicketManagementApp.Repositories.Concrete
 {
     public class EFCustomerRepository : ICustomerRepository
     {
-        private TicketManagementDbContext _db;
+        private readonly TicketManagementDbContext _db;
         public EFCustomerRepository(TicketManagementDbContext db)
         {
             _db = db;

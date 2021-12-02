@@ -124,7 +124,8 @@ namespace TicketManagementApp.Services.Concrete
 
         private void isTicketHasHigherPriority(Ticket ticket)
         {
-            var tickets = _ticketRepository.List().Where(x => x.Employee.Id == ticket.Employee.Id && x.Status == TicketStatus.Assigned.ToString()).ToList();
+            var tickets = _ticketRepository.List().Where(x => x.Status != TicketStatus.Open.ToString() && x.Status != TicketStatus.ReadyForAssignment.ToString());
+            tickets = tickets.Where(x => x.Employee.Id == ticket.Employee.Id && x.Status == TicketStatus.Assigned.ToString()).ToList();
             if (tickets.Any(x => x.Priority > ticket.Priority))
             {
                 throw new Exception("Önem sırası daha yüksek bir ticketiniz var. Lütfen önce bu ticketi tamamlayınız. ERR:SOW:7:2");

@@ -10,7 +10,7 @@ namespace TicketManagementApp.Services.Concrete
 {
     public class CustomerManager : ICustomerService
     {
-        private ICustomerRepository _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
 
         public CustomerManager(ICustomerRepository customerRepository)
         {
@@ -18,6 +18,7 @@ namespace TicketManagementApp.Services.Concrete
         }
         public Customer GetCustomerById(string Id)
         {
+
             Customer customer = _customerRepository.Find(Id);
             if (customer == null)
             {

@@ -40,6 +40,7 @@ namespace TicketManagementApp
             services.AddScoped<ITicketService, TicketManager>();
             services.AddScoped<IEmployeeService, EmployeeManager>();
             services.AddScoped<ICustomerService, CustomerManager>();
+
             //Repositoryler tanýmlandý.
             services.AddScoped<ICustomerRepository, EFCustomerRepository>();
             services.AddScoped<IEmployeeRepository, EFEmployeeRepository>();

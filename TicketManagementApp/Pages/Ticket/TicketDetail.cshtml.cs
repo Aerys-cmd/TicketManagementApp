@@ -45,17 +45,17 @@ namespace TicketManagementApp.Pages.Ticket
             _ticketDetailService = ticketDetailService;
         }
 
-        public void OnGet(string? id)
+        public void OnGet(string? name)
         {
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(name))
             {
-                var ticket = _ticketService.GetTicketById(id);
+                var ticket = _ticketService.GetTicketById(name);
                 if (ticket != null)
                 {
                     TicketViewModel.Subject = ticket.Subject;
                     TicketViewModel.Description = ticket.Description;
                     TicketViewModel.Id = ticket.Id;
-                    TicketViewModel.OpenDate = _ticketDetailService.GetOpenTicketDetailByTicketId(id).Date;
+                    TicketViewModel.OpenDate = _ticketDetailService.GetOpenTicketDetailByTicketId(name).Date;
                     TicketViewModel.CustomerName = ticket.Customer.Name;
                     ViewData["Id"] = TicketViewModel.Id;
                 }

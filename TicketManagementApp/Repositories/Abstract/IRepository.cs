@@ -14,4 +14,5 @@ namespace TicketManagementApp.Repositories.Abstract
         void Delete(string Id);
 
     }
+    
 }

@@ -17,22 +17,26 @@ namespace TicketManagementApp.Models
         Completed
 
     }
+
     public class Ticket
     {
         public Ticket()
         {
             Id = Guid.NewGuid().ToString();
         }
+
         public string Id { get; set; }
         [Required(ErrorMessage = "Ticket konusunu boş geçmeyiniz.")]
         [StringLength(50, ErrorMessage = "Ticket Konusu max 50 karakter girilebilir", MinimumLength = 0)]
         public string Subject { get; set; }
 
         [Required(ErrorMessage = "Ticket açıklamasını boş geçmeyiniz.")]
-        [StringLength(maximumLength: 50, ErrorMessage = "Ticket Açıklaması max 500 karakter girilebilir", MinimumLength = 0)]
+        [StringLength(maximumLength: 500, ErrorMessage = "Ticket Açıklaması max 500 karakter girilebilir", MinimumLength = 0)]
 
         public string Description { get; set; }
+
         public string Status { get; set; }
+        ///
         [Min(0, ErrorMessage = "En az 0 değeri girebilirsiniz.")]
         [Max(5, ErrorMessage = "En fazla 5 değeri girebilirsiniz.")]
         public short Difficulty { get; set; }
